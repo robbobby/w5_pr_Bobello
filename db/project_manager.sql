@@ -13,13 +13,13 @@ CREATE TABLE companies (
 CREATE TABLE employees (
     id SERIAL PRIMARY KEY,
     name VARCHAR(255),
-    company INT REFERENCES companies(id)
+    company_id INT REFERENCES companies(id)
 );
 
 CREATE TABLE projects (
     id SERIAL PRIMARY KEY,
     name VARCHAR(255),
-    company INT REFERENCES companies(id)
+    company_id INT REFERENCES companies(id)
 );
 
 CREATE TABLE tasks (

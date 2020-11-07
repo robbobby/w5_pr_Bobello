@@ -2,8 +2,8 @@ from db.run_sql import run_sql
 from models.employee import Employee
 
 def add(employee):
-    query = 'INSERT INTO employees (name) VALUES (%s) RETURNING *'
-    values = employee.name
+    query = 'INSERT INTO employees (name, company_id) VALUES (%s, %s) RETURNING *'
+    values = [employee.name, employee.company_id]
     results = run_sql(query, values)
     employee.id = results[0]['id']
 
@@ -12,7 +12,7 @@ def select_all():
     query = 'SELECT * FROM employees'
     results = run_sql(query)
     for row in results:
-        employee = Employee(name=row['name'], id=row['id'])
+        employee = Employee(name=row['name'], id=row['id'], company_id=rs['company_id'])
         employees.append(employee)
 
     return employees
@@ -20,15 +20,15 @@ def select_all():
 def select(employee_id):
     query = 'SELECT * FROM employees WHERE id = %s'
     rs = run_sql(query, [employee_id])
-    employee = Employee(name=rs['name'], id=rs['id'])
+    employee = Employee(name=rs['name'], id=rs['id'], company_id=rs['company_id'])
     return employee
 
 def delete(employee):
     run_sql('DELETE FROM employees WHERE id = %s', [employee.id]) ##### Bad practice? <--- No query or values
 
-def update(employee)
-    query = 'UPDATE employees SET name = %s WHERE id = %s'
-    values = [employee.name, employee.id]
+def update(employee):
+    query = 'UPDATE employees SET (name, company_id) = (%s, %s) WHERE id = %s'
+    values = [employee.name, employee.company_id, employee.id]
     run_sql(query, values)
 
 def delete_all():
