@@ -1,6 +1,4 @@
 from db.run_sql import run_sql
-from models.project import Project
-from models.employee import Employee
 import sql_data.employee_sql as employee_sql
 import sql_data.project_sql as project_sql
 from models.employee_project import employee_sql, EmployeeProject
@@ -14,7 +12,7 @@ def add(employee_project):
 
 def select_all():
     employee_projects = []
-    query = 'SELECT & FROM employee_projects'
+    query = 'SELECT * FROM employee_projects'
     results = run_sql(query)
     for row in results:
         project = project_sql.select(row['project_id'])
