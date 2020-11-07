@@ -3,7 +3,7 @@ from models.company import Company
 
 def add(company):
     query = 'INSERT INTO companies (name) VALUES (%s) RETURNING *;'
-    values = company.id
+    values = company.name
     results = run_sql(query, values)
     company.id = results[0]['id']
 
