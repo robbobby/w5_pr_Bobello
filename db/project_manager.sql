@@ -25,7 +25,9 @@ CREATE TABLE projects (
 CREATE TABLE tasks (
     id SERIAL PRIMARY KEY,
     name  VARCHAR(255),
-    details TEXT,
+    description TEXT,
+    completed_amount INT,
+    completed BOOL,
     project_id INT REFERENCES projects(id)
 );
 
