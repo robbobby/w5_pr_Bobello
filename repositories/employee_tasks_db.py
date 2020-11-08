@@ -1,11 +1,11 @@
 from db.run_sql import run_sql
 import repositories.employee_db as employee_sql
 import repositories.task_db as task_sql
-from models.employee_task import employee_sql, Employeetask
+from models.employee_task import EmployeeTasks
 
 
-def add(employee_task):
-    query = 'INSERT INTO employee_tasks (employee_id, task_id) = (%s, %s) RETURNING id'
+def save(employee_task):
+    query = 'INSERT INTO employee_tasks (employee_id, task_id) VALUES (%s, %s) RETURNING id'
     values = [employee_task.employee.id, employee_task.task.id]
     results = run_sql(query, values)
     employee_task.id = results[0]['id']

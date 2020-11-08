@@ -1,9 +1,9 @@
 from db.run_sql import run_sql
 from models.employee import Employee
 
-def add(employee):
+def save(employee):
     query = 'INSERT INTO employees (name, company_id) VALUES (%s, %s) RETURNING *'
-    values = [employee.name, employee.company_id]
+    values = [employee.name, employee.company.id]
     results = run_sql(query, values)
     employee.id = results[0]['id']
 
@@ -12,7 +12,7 @@ def select_all():
     query = 'SELECT * FROM employees'
     results = run_sql(query)
     for row in results:
-        employee = Employee(name=row['name'], id=row['id'], company_id=rs['company_id'])
+        employee = Employee(name=row['name'], id=row['id'], company=rs['company_id'])
         employees.append(employee)
 
     return employees
@@ -20,7 +20,7 @@ def select_all():
 def select(employee_id):
     query = 'SELECT * FROM employees WHERE id = %s'
     rs = run_sql(query, [employee_id])
-    employee = Employee(name=rs['name'], id=rs['id'], company_id=rs['company_id'])
+    employee = Employee(name=rs['name'], id=rs['id'], company=rs['company_id'])
     return employee
 
 def delete(employee):

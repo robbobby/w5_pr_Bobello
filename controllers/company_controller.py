@@ -5,8 +5,9 @@ import repositories.company_db as company_db
 
 companies_blueprint = Blueprint("companies", __name__)
 
-# Companies Home Page
+
+                ##### Companies Home Page #####
 @companies_blueprint.route("/companies")
 def companies():
-    compapnies = company_db.get_all()
+    companies = company_db.get_all()
     return render_template("companies/index.html", companies=companies)

@@ -1,5 +1,5 @@
-class EmployeeProjects:
-    def __init__(self, employee, project, id=None):
-        self.project = project
+class EmployeeTasks:
+    def __init__(self, employee, task, id=None):
+        self.task = task
         self.employee = employee
         self.id = id

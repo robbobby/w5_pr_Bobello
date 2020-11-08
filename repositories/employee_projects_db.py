@@ -1,11 +1,11 @@
 from db.run_sql import run_sql
-import repositories.employee_db as employee_sql
-import repositories.project_db as project_sql
-from models.employee_project import employee_sql, EmployeeProject
+import repositories.employee_db as employee_db
+import repositories.project_db as project_db
+from models.employee_project import  EmployeeProject
 
 
-def add(employee_project):
-    query = 'INSERT INTO employee_projects (employee_id, project_id) = (%s, %s) RETURNING id'
+def save(employee_project):
+    query = 'INSERT INTO employee_projects (employee_id, project_id) VALUES (%s, %s) RETURNING id'
     values = [employee_project.employee.id, employee_project.project.id]
     results = run_sql(query, values)
     employee_project.id = results[0]['id']
@@ -15,8 +15,8 @@ def select_all():
     query = 'SELECT * FROM employee_projects'
     results = run_sql(query)
     for row in results:
-        project = project_sql.select(row['project_id'])
-        employee = employee_sql.select(row['employee_id'])
+        project = project_db.select(row['project_id'])
+        employee = employee_db.select(row['employee_id'])
         employee_project = EmployeeProject(project=project, employee=employee)
         employee_projects.append(employee_project)
 
@@ -25,8 +25,8 @@ def select_all():
 def select(id):
     query = 'SELECT * FROM employee_projects WHERE id = %s'
     result = run_sql(query, [id])
-    project = project_sql.select(result['project_id'])
-    employee = employee_sql.select(result['employee_id'])
+    project = project_db.select(result['project_id'])
+    employee = employee_db.select(result['employee_id'])
     employee_project = EmployeeProject(employee=employee, project=project)
 
     return employee_project

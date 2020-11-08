@@ -1,12 +1,14 @@
 from db.run_sql import run_sql
 from models.task import Task
+import repositories.project_db as project_db
+from models.project import Project
 
-def add(task):
-    query = 'INSERT INTO tasks (name, description, completed_amount, completed, company_id) ' \
+def save(task):
+    query = 'INSERT INTO tasks (name, description, completed_amount, completed, project_id) ' \
             'VALUES (%s, %s, %s, %s, %s) RETURNING id'
 
     result = run_sql(query, [task.name, task.description, task.completed_amount,
-                             task.completed, task.company_id])
+                             task.completed, task.project.id])
     task.id = result[0]['id']
 
 def get_all():
@@ -14,11 +16,11 @@ def get_all():
     query = 'SELECT * FROM tasks'
     results = run_sql(query)
     for row in results:
+        project = project_db.select(row['project_id'])
         task = Task(name=row['name'], description=row['description'], id=row['id'],
-                    company_id=row['company_id'], completed_amount=row['completed_amount'],
+                    project=project, completed_amount=row['completed_amount'],
                     completed=row['completed'])
         tasks.append(task)
-
     return tasks
 
 def select(task_id):

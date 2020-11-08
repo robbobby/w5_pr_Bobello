@@ -1,9 +1,10 @@
 from db.run_sql import run_sql
 from models.project import Project
 
-def add(project):
+def save(project):
     query = 'INSERT INTO projects (name, company_id) VALUES (%s, %s) RETURNING id'
-    result = run_sql(query, [project.name, project.company_id])
+    values = [project.name, project.company.id]
+    result = run_sql(query, values)
     project.id = result[0]['id']
 
 def select_all():
@@ -11,7 +12,7 @@ def select_all():
     query = 'SELECT * FROM projects'
     results = run_sql(query)
     for row in results:
-        project = Project(name=row['name'], id=row['id'], company_id=row['company_id'])
+        project = Project(name=row['name'], id=row['id'], company=row['company_id'])
         projects.append(project)
 
     return projects
@@ -19,7 +20,7 @@ def select_all():
 def select(project_id):
     query = 'SELECT * FROM projects WHERE id = %s'
     rs = run_sql(query, [project_id])
-    project = Project(name=rs['name'], id=rs['id'], company_id=rs['company_id'])
+    project = Project(name=rs['name'], id=rs['id'], company=rs['company_id'])
     return project
 
 def delete(project):
