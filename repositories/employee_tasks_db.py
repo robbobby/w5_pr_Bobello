@@ -1,6 +1,6 @@
 from db.run_sql import run_sql
-import sql_data.employee_sql as employee_sql
-import sql_data.task_sql as task_sql
+import repositories.employee_db as employee_sql
+import repositories.task_db as task_sql
 from models.employee_task import employee_sql, Employeetask
 
 

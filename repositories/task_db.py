@@ -9,7 +9,7 @@ def add(task):
                              task.completed, task.company_id])
     task.id = result[0]['id']
 
-def select_all():
+def get_all():
     tasks = []
     query = 'SELECT * FROM tasks'
     results = run_sql(query)

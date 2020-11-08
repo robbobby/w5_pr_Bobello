@@ -1,6 +1,6 @@
 from db.run_sql import run_sql
-import sql_data.employee_sql as employee_sql
-import sql_data.project_sql as project_sql
+import repositories.employee_db as employee_sql
+import repositories.project_db as project_sql
 from models.employee_project import employee_sql, EmployeeProject
 
 

@@ -7,7 +7,7 @@ def add(company):
     results = run_sql(query, values)
     company.id = results[0]['id']
 
-def select_all():
+def get_all():
     companies = []
     query = 'SELECT * FROM companies'
     results = run_sql(query)
