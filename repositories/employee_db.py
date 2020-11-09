@@ -19,7 +19,7 @@ def get_all():
 
 def select(employee_id):
     query = 'SELECT * FROM employees WHERE id = %s'
-    rs = run_sql(query, [employee_id])
+    rs = run_sql(query, [employee_id])[0]
     employee = Employee(name=rs['name'], id=rs['id'], company=rs['company_id'])
     return employee
 

@@ -9,13 +9,13 @@ main {
 .logo {
     padding: 30px 30px 10px 30px;
     display: flex;
-    font-size: 20px;
     color: #47505A;
     border: 1px solid #979797;
     box-shadow: 10px 10px 10px 0 wheat;
     background-color: dodgerblue;
     /*opacity: 50%;*/
     justify-content: space-between;
+    font-size: 15px;
 }
 h1 {
     margin-left: 20px;
@@ -53,6 +53,7 @@ ul > li.a {
     opacity: 90%;
     box-shadow: 2px 2px 2px 0 white;
     border-radius: 5px;
+    margin-bottom: 5px;
 }
 
 .button:hover {

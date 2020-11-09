@@ -19,7 +19,7 @@ def get_all():
 
 def select(project_id):
     query = 'SELECT * FROM projects WHERE id = %s'
-    rs = run_sql(query, [project_id])
+    rs = run_sql(query, [project_id])[0]
     project = Project(name=rs['name'], id=rs['id'], company=rs['company_id'])
     return project
 
@@ -32,3 +32,13 @@ def update(project):
 
 def delete_all():
     run_sql('DELETE FROM projects')
+
+def get_company_projects(company):
+    projects = []
+    query = 'SELECT * FROM projects WHERE company_id = %s'
+    results = run_sql(query, [company.id])
+
+    for row in results:
+        project = Project(row['name'], company, row['id'])
+        projects.append(project)
+    return projects

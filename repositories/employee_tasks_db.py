@@ -24,7 +24,7 @@ def get_all():
 
 def select(id):
     query = 'SELECT * FROM employee_tasks WHERE id = %s'
-    result = run_sql(query, [id])
+    result = run_sql(query, [id])[0]
     task = task_sql.select(result['task_id'])
     employee = employee_sql.select(result['employee_id'])
     employee_task = Employeetask(employee=employee, task=task)
