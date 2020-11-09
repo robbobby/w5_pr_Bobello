@@ -7,7 +7,7 @@ def save(project):
     result = run_sql(query, values)
     project.id = result[0]['id']
 
-def select_all():
+def get_all():
     projects = []
     query = 'SELECT * FROM projects'
     results = run_sql(query)

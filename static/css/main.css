@@ -52,12 +52,14 @@ ul > li.a {
     text-decoration: none;
     opacity: 90%;
     box-shadow: 2px 2px 2px 0 white;
+    border-radius: 5px;
 }
 
 .button:hover {
     /*background-color: darkgray;*/
     box-shadow: 2px 2px 2px 0 white;
     opacity: 100%;
+    border: 1px solid white;
 }
 
 .button:active {

@@ -10,7 +10,7 @@ def save(employee_project):
     results = run_sql(query, values)
     employee_project.id = results[0]['id']
 
-def select_all():
+def get_all():
     employee_projects = []
     query = 'SELECT * FROM employee_projects'
     results = run_sql(query)

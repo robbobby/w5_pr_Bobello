@@ -1,0 +1,15 @@
+{% extends "base.html" %}{%  block content %}
+<h2>This is the company page</h2>
+    <div>
+        <a href="/companies/new" class="button">Create New Company</a>
+    </div>
+    <form action="/companies">
+        <select name="company_id">
+            {% for company in companies %}
+                <option value="{{ company.id }}">{{ company.name }}</option>
+            {% endfor %}
+                <option value="this_one">one_this</option>
+        </select>
+        <input class="button" type="submit">
+    </form>
+{% endblock %}
