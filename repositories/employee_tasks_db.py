@@ -16,7 +16,7 @@ def get_all():
     results = run_sql(query)
     for row in results:
         task = task_sql.select(row['task_id'])
-        employee = employee_sql.select(row['employee_id'])
+        employee = employee_sql.get(row['employee_id'])
         employee_task = Employeetask(task=task, employee=employee)
         employee_tasks.append(employee_task)
 
@@ -26,7 +26,7 @@ def select(id):
     query = 'SELECT * FROM employee_tasks WHERE id = %s'
     result = run_sql(query, [id])[0]
     task = task_sql.select(result['task_id'])
-    employee = employee_sql.select(result['employee_id'])
+    employee = employee_sql.get(result['employee_id'])
     employee_task = Employeetask(employee=employee, task=task)
 
     return employee_task

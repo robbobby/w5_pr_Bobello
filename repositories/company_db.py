@@ -19,7 +19,7 @@ def get_all():
 
     return companies
 
-def select(company_id):
+def get(company_id):
     query = "SELECT * FROM companies WHERE id = %s"
     result = run_sql(query, [company_id])[0]
     company = Company(result['name'], result['id'])

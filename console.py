@@ -40,6 +40,7 @@ employee2 = Employee("Barb", company=company)
 employee3 = Employee("Peggy", company=company)
 employee4 = Employee("Ritta", company=company)
 employee5 = Employee("George", company=company)
+Employee6 = Employee("Donald Trump", company=company)
 
 employee_db.save(employee)
 employee_db.save(employee1)
@@ -52,8 +53,21 @@ task = Task("Tweet things people appreciate", "Self explanatory", project, 99)
 task_db.save(task)
 
 emp_pro = EmployeeProject(employee1, project)
-
 emp_pro_db.save(emp_pro)
+emp_pro = EmployeeProject(employee2, project)
+emp_pro_db.save(emp_pro)
+emp_pro = EmployeeProject(employee3, project)
+emp_pro_db.save(emp_pro)
+emp_pro = EmployeeProject(employee5, project)
+emp_pro_db.save(emp_pro)
+emp_pro = EmployeeProject(employee1, project1)
+emp_pro_db.save(emp_pro)
+emp_pro = EmployeeProject(employee1, project2)
+emp_pro_db.save(emp_pro)
+emp_pro = EmployeeProject(employee2, project2)
+emp_pro_db.save(emp_pro)
+
+
 
 emp_task = EmployeeTasks(employee, task)
 emp_task_db.save(emp_task)

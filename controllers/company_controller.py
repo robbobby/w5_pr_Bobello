@@ -47,6 +47,6 @@ def reroute_to_company_home():
 
 @companies_blueprint.route('/company_home/<id>', methods=['GET'])
 def company(id):
-    company = company_db.select(id)
+    company = company_db.get(id)
     projects = company_db.get_projects(company)
     return render_template('companies/company.html', company=company, projects=projects)

@@ -1,5 +1,7 @@
 from db.run_sql import run_sql
 from models.employee import Employee
+import repositories.company_db as company_db
+import repositories.project_db as project_db
 
 def save(employee):
     query = 'INSERT INTO employees (name, company_id) VALUES (%s, %s) RETURNING *'
@@ -12,15 +14,17 @@ def get_all():
     query = 'SELECT * FROM employees'
     results = run_sql(query)
     for row in results:
-        employee = Employee(name=row['name'], id=row['id'], company=rs['company_id'])
+        company = company_db.get(row['company_id'])
+        employee = Employee(name=row['name'], id=row['id'], company=company)
         employees.append(employee)
 
     return employees
 
-def select(employee_id):
+def get(employee_id):
     query = 'SELECT * FROM employees WHERE id = %s'
     rs = run_sql(query, [employee_id])[0]
-    employee = Employee(name=rs['name'], id=rs['id'], company=rs['company_id'])
+    company = company_db.get(rs['company_id'])
+    employee = Employee(name=rs['name'], id=rs['id'], company=company)
     return employee
 
 def delete(employee):
@@ -33,3 +37,6 @@ def update(employee):
 
 def delete_all():
     run_sql('DELETE FROM employees')
+
+def get_projects(employee):
+    project_db.get_employee_projects(employee)
